@@ -1,7 +1,14 @@
+import pathlib
 from setuptools import setup, find_packages
 import os
 
-version = "0.1"
+version = "0.2"
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE / "README.md").read_text()
 
 
 dependencies = [
@@ -17,13 +24,17 @@ setup(
     description='Tools for generating code from custom ShowCode Forge questions',
     author='Titusz Ban',
     author_email='tituszban@gmail.com',
-    keywords=[],
+    keywords=["showcode"],
+    long_description=README,
+    long_description_content_type="text/markdown",
+    url="https://github.com/tituszban/showcode_forge",
     install_requires=dependencies,
     setup_requires=dependencies,
     classifiers=[
         # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
         'Development Status :: 4 - Beta',
         'Topic :: Software Development :: Build Tools',
+        "License :: OSI Approved :: MIT License",
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.7',
     ],
