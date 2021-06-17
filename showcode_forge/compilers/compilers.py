@@ -17,11 +17,11 @@ def compile(args):
         raise Exception("Compilation is not yet supported")
 
     with open(args.output, "w") as f:
-        json.dump([{
+        json.dump({
             "title": "",
             "difficulty": 1,
             "className": "",
             "methodName": "",
             "rubric": rubric,
             **data,
-        }], f, indent=4)
+        }, f, indent=4)

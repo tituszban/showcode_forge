@@ -7,7 +7,7 @@ DEFAULT = "default"
 
 def extract(args):
     with open(args.file) as f:
-        description = json.load(f)[0]
+        description = json.load(f)
 
     with open("question.html", "w") as f:
         write_html(description["rubric"], f)
