@@ -55,7 +55,7 @@ def get_types(parameter):
         return [6, 7, 8, 9, 10, 11]
     if all(isinstance(p, int) for p in parameter):
         return [6, 11, 10]
-    if all(isinstance(p, float) for p in parameter):
+    if all(isinstance(p, (float, int)) for p in parameter):
         return [11, 10]
     if all(isinstance(p, bool) for p in parameter):
         return [9]
