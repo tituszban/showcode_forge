@@ -1,5 +1,5 @@
 import json
-from .python_extractors import PytestExtractor, UnittestExtractor
+from .python_extractors import PytestExtractor, UnittestExtractor, PytestSCForgeExtractor
 from .html_writer import write_html
 
 DEFAULT = "default"
@@ -16,6 +16,7 @@ def extract(args):
         "py": {
             "pytest": PytestExtractor,
             "unittest": UnittestExtractor,
+            "pytest_scforge": PytestSCForgeExtractor,
             DEFAULT: UnittestExtractor
         }
     }
