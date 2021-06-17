@@ -18,7 +18,7 @@ parser_compile.add_argument("test_file", type=str, help="Path to the challenge t
 parser_compile.add_argument("question_file", type=str, help="Path to the question file")
 parser_compile.add_argument("--output", type=str, default="challenge.json", help="Path to the output json file")
 parser_compile.add_argument("--language", default="py", help="Which programming language the source file is in")
-parser_compile.add_argument("--framework", default="pytest", help="Which test framework the source test is in")
+parser_compile.add_argument("--framework", default="pytest_scforge", help="Which test framework the source test is in")
 parser_compile.set_defaults(func=compile)
 
 def main():
