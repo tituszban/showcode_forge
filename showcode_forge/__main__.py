@@ -9,7 +9,7 @@ parser.set_defaults(func=lambda *args: parser.print_help())
 parser_extract = subparsers.add_parser("extract")
 parser_extract.add_argument("file", type=str, help="Path to the challenge json file")
 parser_extract.add_argument("--language", default="py", help="Which programming language should the code be generated in")
-parser_extract.add_argument("--framework", default="pytest", help="Which test framework should the code be generated in")
+parser_extract.add_argument("--framework", default="unittest", help="Which test framework should the code be generated in")
 parser_extract.set_defaults(func=extract)
 
 parser_compile = subparsers.add_parser("compile")

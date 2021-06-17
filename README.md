@@ -23,11 +23,11 @@ showcode_forge extract [--language LANGUAGE] [--framework FRAMEWORK] file
 
  - `file` is a path to the `.json` file
  - `LANGUAGE` is the selected programming language. Currently supported: `py`
- - `FRAMEWORK` is the selected unit testing framework. Currently supported: `pytest`
+ - `FRAMEWORK` is the selected unit testing framework. Currently supported: `unittest`, `pytest`, default: `unittest`
 
 Example usage:
 ```sh
-showcode_forge extract --language py --framework pytest challenge.json
+showcode_forge extract --language py --framework unittest challenge.json
 ```
 
 ## Compile

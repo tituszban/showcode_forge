@@ -1,6 +1,8 @@
 import json
-from .pytest_extractor import pytest_extractor
+from .python_extractors import PytestExtractor, UnittestExtractor
 from .html_writer import write_html
+
+DEFAULT = "default"
 
 
 def extract(args):
@@ -10,18 +12,26 @@ def extract(args):
     with open("question.html", "w") as f:
         write_html(description["rubric"], f)
 
-    framework_extractors = {
-        ("py", "pytest"): pytest_extractor
+    extractors = {
+        "py": {
+            "pytest": PytestExtractor,
+            "unittest": UnittestExtractor,
+            DEFAULT: UnittestExtractor
+        }
     }
 
-    framework = (args.language, args.framework)
-    if framework in framework_extractors:
-        return framework_extractors[framework](description)
+    if args.language in extractors:
+        language_extractors = extractors[args.language]
 
-    language_extractors = {
-        "py": pytest_extractor
-    }
-    if args.language in language_extractors:
-        return language_extractors[args.language](description)
+        if args.framework in language_extractors:
+            extractor = language_extractors[args.framework](description)
+        elif DEFAULT in language_extractors:
+            extractor = language_extractors[DEFAULT](description)
+        else:
+            raise Exception(
+                f"No framework extractor found for {args.language} {args.framework}")
+        extractor.write_source()
+        extractor.write_tests()
 
-    raise Exception(f"No extractor found for {args.language} {args.framework}")
+    else:
+        raise Exception(f"No extractor found for {args.language}")
