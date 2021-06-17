@@ -19,7 +19,7 @@ class PytestExtractor(PythonExtractorABC):
         f.write(f"    [\n")
         for test in tests:
             f.write(
-                f"        ({', '.join(map(repr, [*test['inputs'], test['output']]))}),    # {test['descripiton']}\n")
+                f"        ({', '.join(map(repr, [*test['inputs'], test['output']]))}),    # {test['description']}\n")
         f.write(f"    ]\n")
         f.write(f")\n")
         f.write(f"def test_{name}({', '.join(self._parameters)}, result):\n")
