@@ -8,27 +8,34 @@ def write_main(path, class_name, method_name, parameters):
         f.write(f"    {class_name[0].lower()} = {class_name}()\n")
         f.write(f"    print({class_name[0].lower()}.{method_name}())\n")
 
+
 def write_test(class_name, method_name, parameters, tests, name, f):
     f.write(f'@pytest.mark.{name}\n')
     f.write(f"@pytest.mark.parametrize(\n")
     f.write(f"    \"{','.join(parameters)},result\",\n")
     f.write(f"    [\n")
     for test in tests:
-        f.write(f"        ({', '.join(map(repr, [*test['inputs'], test['output']]))}),\n")
+        f.write(
+            f"        ({', '.join(map(repr, [*test['inputs'], test['output']]))}),\n")
     f.write(f"    ]\n")
     f.write(f")\n")
     f.write(f"def test_{name}({', '.join(parameters)}, result):\n")
     f.write(f"    {class_name[0].lower()} = {class_name}()\n")
-    f.write(f"    assert {class_name[0].lower()}.{method_name}({', '.join(parameters)}) == result\n")
+    f.write(
+        f"    assert {class_name[0].lower()}.{method_name}({', '.join(parameters)}) == result\n")
+
 
 def write_tests(path, class_name, method_name, parameters, public_tests, private_tests):
     with open(path, "w") as f:
         f.write("import pytest\n")
         f.write(f"from main import {class_name}\n")
         f.write("\n\n")
-        write_test(class_name, method_name, parameters, public_tests, "public", f)
+        write_test(class_name, method_name, parameters,
+                   public_tests, "public", f)
         f.write("\n\n")
-        write_test(class_name, method_name, parameters, private_tests, "hidden", f)
+        write_test(class_name, method_name, parameters,
+                   private_tests, "hidden", f)
+
 
 def pytest_extractor(description):
     class_name = description["className"]
@@ -41,4 +48,5 @@ def pytest_extractor(description):
     unit_tests = description["unitTests"]
     public_unit_tests = [t for t in unit_tests if t["isPublic"]]
     private_unit_tests = [t for t in unit_tests if not t["isPublic"]]
-    write_tests(f"test_{method_name}.py", class_name, method_name, parameters, public_unit_tests, private_unit_tests)
+    write_tests(f"test_{method_name}.py", class_name, method_name,
+                parameters, public_unit_tests, private_unit_tests)

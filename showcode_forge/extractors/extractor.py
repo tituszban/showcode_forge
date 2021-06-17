@@ -2,13 +2,14 @@ import json
 from .pytest_extractor import pytest_extractor
 from .html_writer import write_html
 
+
 def extract(args):
     with open(args.file) as f:
         description = json.load(f)[0]
 
     with open("question.html", "w") as f:
         write_html(description["rubric"], f)
-    
+
     framework_extractors = {
         ("py", "pytest"): pytest_extractor
     }
