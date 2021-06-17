@@ -97,6 +97,8 @@ This runs exactly the same if you run `pytest` in the command line. `@challenge`
 
 It uses the parameter declaration and the various test cases to infer parameter names and types. It automatically calculates the point total as well. If `points` is not specified, it defaults to 1. If `is_public` is not specified it defaults to `False`.
 
+It does not support every field currently. You will have to manually edit the `.json` to set the `title`, `className` and `methodName`. `difficulty` is infered from total points, but can be updated.
+
 ## Contribute
 
 Contributions, bug fixes and support for more languages are welcome!
