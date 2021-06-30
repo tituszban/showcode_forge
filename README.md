@@ -12,14 +12,14 @@ Install the latest release of the package from PyPi.
 pip install showcode_forge
 ```
 
-## Verify
+## Validate
 
-Verifying is ensuring that your challenge `.json` file is correct according to the ["Tome of Crafting"](https://bit.ly/3pXDMAp) (aka the how to guide). It verifies that you have all fields correctly filled out, that your unit tests match your parameters and return types and that your points add up.
+Validating is ensuring that your challenge `.json` file is correct according to the ["Tome of Crafting"](https://bit.ly/3pXDMAp) (aka the how to guide). It verifies that you have all fields correctly filled out, that your unit tests match your parameters and return types and that your points add up.
 
 How to run:
 
 ```sh
-showcode_forge verify [--verbose] file
+showcode_forge validate [--verbose] file
 ```
 
 - `file` is a path ot the `.json` file
@@ -28,7 +28,7 @@ showcode_forge verify [--verbose] file
 Example usage:
 
 ```sh
-showcode_forge verify --verbose challenge.json
+showcode_forge validate --verbose challenge.json
 ```
 
 ## Extract
