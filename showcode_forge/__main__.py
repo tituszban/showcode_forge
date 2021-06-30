@@ -1,6 +1,7 @@
 import argparse
 from .extractors import extract
 from .compilers import compile
+from .validator import validate
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers()
@@ -20,6 +21,11 @@ parser_compile.add_argument("--output", type=str, default="challenge.json", help
 parser_compile.add_argument("--language", default="py", help="Which programming language the source file is in")
 parser_compile.add_argument("--framework", default="pytest_scforge", help="Which test framework the source test is in")
 parser_compile.set_defaults(func=compile)
+
+parser_validate = subparsers.add_parser("validate")
+parser_validate.add_argument("file", type=str, help="Path to the challenge json file")
+parser_validate.add_argument("--verbose", action="store_true", help="Enable additional logging")
+parser_validate.set_defaults(func=validate)
 
 def main():
     args = parser.parse_args()

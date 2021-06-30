@@ -12,29 +12,51 @@ Install the latest release of the package from PyPi.
 pip install showcode_forge
 ```
 
+## Verify
+
+Verifying is ensuring that your challenge `.json` file is correct according to the ["Tome of Crafting"](https://bit.ly/3pXDMAp) (aka the how to guide). It verifies that you have all fields correctly filled out, that your unit tests match your parameters and return types and that your points add up.
+
+How to run:
+
+```sh
+showcode_forge verify [--verbose] file
+```
+
+- `file` is a path ot the `.json` file
+- `--verbose` enables additional logging. Without this, if there are no errors, the tool will not output anything
+
+Example usage:
+
+```sh
+showcode_forge verify --verbose challenge.json
+```
+
 ## Extract
 
 Extracting is turning a challenge `.json` (provided by the community) into a set of files, including `question.html` and generated source and test files for your selected language.
 
 How to run:
+
 ```sh
 showcode_forge extract [--language LANGUAGE] [--framework FRAMEWORK] file
 ```
 
- - `file` is a path to the `.json` file
- - `LANGUAGE` is the selected programming language. Currently supported: `py`
- - `FRAMEWORK` is the selected unit testing framework. Currently supported: `unittest`, `pytest`, `pytest_scforge` (see bellow), default: `unittest`
+- `file` is a path to the `.json` file
+- `LANGUAGE` is the selected programming language. Currently supported: `py`
+- `FRAMEWORK` is the selected unit testing framework. Currently supported: `unittest`, `pytest`, `pytest_scforge` (see bellow), default: `unittest`
 
 Example usage:
+
 ```sh
 showcode_forge extract --language py --framework unittest challenge.json
 ```
 
 ## Compile
 
-Compiling is turning a source, test and question files into a `.json` file. 
+Compiling is turning a source, test and question files into a `.json` file.
 
 How to run:
+
 ```sh
 showcode_forge compile [--output OUTPUT] [--language LANGUAGE] [--framework FRAMEWORK] source_file test_file question_file
 ```
@@ -47,6 +69,7 @@ showcode_forge compile [--output OUTPUT] [--language LANGUAGE] [--framework FRAM
 - `FRAMEWORK` is the unit testing framework used to define the test cases. Currently supported: `pytest_scforge` (see bellow)
 
 Example usage:
+
 ```
 showcode_forge compile --language py --framework pytest_scforge --output my_awesome_challenge.json solution.py tests.py question.html
 ```
