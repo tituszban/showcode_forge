@@ -122,6 +122,30 @@ It uses the parameter declaration and the various test cases to infer parameter 
 
 It does not support every field currently. You will have to manually edit the `.json` to set the `title`, `className` and `methodName`. `difficulty` is infered from total points, but can be updated.
 
+## Scaffold
+
+Scaffolding sets up the files needed to develop a challenge with the some starting boilerplate code in place.
+
+How to run:
+
+```sh
+showcode_forge scaffold [-h] [--argument ARGUMENT [ARGUMENT ...]] [--result RESULT] [--output_dir OUTPUT_DIR] [--language LANGUAGE] [--framework FRAMEWORK] class_name method_name
+```
+
+ - `class_name` is the name of the tested class
+ - `method_name` is the name of the tested method in the tested class
+ - `ARGUMENT` is a list of argument names that the tested method takes
+ - `RESULT` is the name of the result produced by the tested method
+ - `OUTPUT_DIR` is the directory where the output is generated. If not specified, it will be generated in the current directory
+ - `LANGUAGE` is the programming language the files will be generated in. Currently supported: `py`
+ - `FRAMEWORK` is the unit testing framework used to define the test cases. Currently supported: `pytest_scforge` (see bellow)
+
+Example usage:
+
+```sh
+python -m showcode_forge scaffold "ClassName" "solve_challenge" --argument "arg_1" "arg_2" "arg_3" --language py --framework pytest_scforge
+```
+
 ## Contribute
 
 Contributions, bug fixes and support for more languages are welcome!
