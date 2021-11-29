@@ -18,7 +18,7 @@ def test_{1}({2}, {3}):
 
 solution_bolierplate = """
 class {0}:
-    def {1}(self, {2}, {3}):
+    def {1}(self, {2}):
         pass
 
 
