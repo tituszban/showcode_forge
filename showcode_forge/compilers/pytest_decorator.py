@@ -1,5 +1,6 @@
 import pytest
 
+
 class TestCase:
     test_cases = []
     parameters = []
@@ -12,7 +13,10 @@ class TestCase:
         self.is_public = is_public
 
     def to_pytest_case(self):
-        return [*self.inputs, self.output]
+        return pytest.param(
+            *self.inputs, self.output,
+            id=self.description or f"{self.inputs}:{self.output}"
+        )
 
     def is_valid(self, fields):
         return len(fields.split(",")) == len(self.inputs) + 1
@@ -28,11 +32,12 @@ class TestCase:
 
 
 def challenge(fields, cases):
-    assert all(isinstance(case, TestCase)
-               for case in cases), "Invalid case type"
-    assert all(case.is_valid(fields)
-               for case in cases), "Invalid test case: wrong number of inputs"
-    assert len(TestCase.parameters) == 0 or TestCase.parameters[0] == fields, "Invalid test case: argument must always be the same"
+    assert all(isinstance(case, TestCase) for case in cases), \
+        "Invalid case type"
+    assert all(case.is_valid(fields) for case in cases), \
+        "Invalid test case: wrong number of inputs"
+    assert len(TestCase.parameters) == 0 or TestCase.parameters[0] == fields, \
+        "Invalid test case: argument must always be the same"
 
     for case in cases:
         TestCase.test_cases.append(case)
