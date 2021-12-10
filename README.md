@@ -129,7 +129,7 @@ Scaffolding sets up the files needed to develop a challenge with the some starti
 How to run:
 
 ```sh
-showcode_forge scaffold [-h] [--argument ARGUMENT [ARGUMENT ...]] [--result RESULT] [--output_dir OUTPUT_DIR] [--language LANGUAGE] [--framework FRAMEWORK] class_name method_name
+showcode_forge scaffold [-h] [--argument ARGUMENT [ARGUMENT ...]] [--result RESULT] [--output_dir OUTPUT_DIR] [--language LANGUAGE] [--framework FRAMEWORK] [--question_file_type {html,md}] class_name method_name
 ```
 
  - `class_name` is the name of the tested class
@@ -138,7 +138,8 @@ showcode_forge scaffold [-h] [--argument ARGUMENT [ARGUMENT ...]] [--result RESU
  - `RESULT` is the name of the result produced by the tested method
  - `OUTPUT_DIR` is the directory where the output is generated. If not specified, it will be generated in the current directory
  - `LANGUAGE` is the programming language the files will be generated in. Currently supported: `py`
- - `FRAMEWORK` is the unit testing framework used to define the test cases. Currently supported: `pytest_scforge` (see bellow)
+ - `FRAMEWORK` is the unit testing framework used to define the test cases. Currently supported: `pytest_scforge` (see above)
+ - `QUESTION_FILE_TYPE` is the type of markup used for the question file. Currently supported: `html`, `md` (Markdown)
 
 Example usage:
 
