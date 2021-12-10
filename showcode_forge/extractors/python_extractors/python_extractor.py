@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 class PythonExtractorABC(ABC):
     def __init__(self, description):
+        self._title = description["title"]
         self._class_name = description["className"]
         self._class_instance_name = self._class_name[0].lower()
         self._method_name = description["methodName"]
@@ -13,7 +14,9 @@ class PythonExtractorABC(ABC):
 
     def write_source(self):
         with open("solution.py", "w") as f:
+            f.write("from showcode_forge import challenge_method\n\n\n")
             f.write(f"class {self._class_name}:\n")
+            f.write(f"    @challenge_method(\"{self._title}\")\n")
             f.write(f"    def {self._method_name}(self, {', '.join(self._parameters)}):\n")
             f.write(f"        pass\n")
             f.write("\n\n")
