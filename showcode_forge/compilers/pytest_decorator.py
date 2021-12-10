@@ -45,3 +45,28 @@ def challenge(fields, cases):
         TestCase.parameters.append(fields)
 
     return pytest.mark.parametrize(fields, [case.to_pytest_case() for case in cases])
+
+
+class ChallengeMethodWrapper:
+    def __init__(self):
+        self._found = []
+
+    def __call__(self, title):
+        def decorator(f):
+            if len(self._found) <= 0:
+                sp = f.__qualname__.split(".")
+                method_name = sp[-1] if len(sp) > 0 else None
+                class_name = sp[-2] if len(sp) > 1 else None
+                print(title, method_name, class_name)
+                self._found.append((title, method_name, class_name))
+            return f
+        return decorator
+
+    @property
+    def method_info(self):
+        if any(self._found):
+            return self._found[0]
+        return None, None, None
+
+
+challenge_method = ChallengeMethodWrapper()

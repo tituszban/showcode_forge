@@ -1,1 +1,1 @@
-from .compilers.pytest_decorator import challenge, TestCase
+from .compilers.pytest_decorator import challenge, TestCase, challenge_method

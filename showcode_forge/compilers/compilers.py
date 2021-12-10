@@ -14,7 +14,7 @@ def compile(args):
     if args.language == "py" and args.framework == "pytest_scforge":
         data = pytest_compiles(args)
     else:
-        raise Exception("Compilation is not yet supported")
+        raise Exception(f"Compilation is not yet supported for {args.language} {args.framework}")
 
     with open(args.output, "w") as f:
         json.dump({

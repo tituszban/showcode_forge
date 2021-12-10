@@ -36,6 +36,7 @@ parser_scaffold.add_argument("--result", type=str, default="result", help="The n
 parser_scaffold.add_argument("--output_dir", type=str, default=".", help="The directory where the scaffold will be generated")
 parser_scaffold.add_argument("--language", default="py", help="Which programming language the source file is in")
 parser_scaffold.add_argument("--framework", default="pytest_scforge", help="Which test framework the source test is in")
+parser_scaffold.add_argument("--title", default="Challenge title", help="The title of the challenge")
 parser_scaffold.set_defaults(func=scaffold)
 
 def main():

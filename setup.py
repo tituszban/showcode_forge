@@ -2,7 +2,7 @@ import pathlib
 from setuptools import setup, find_packages
 import os
 
-version = "0.7"
+version = "0.8"
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent

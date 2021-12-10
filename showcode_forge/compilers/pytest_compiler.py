@@ -6,6 +6,7 @@ from functools import reduce
 from contextlib import contextmanager
 from ..shared import get_types
 
+
 @contextmanager
 def add_to_path(p):
     import sys
@@ -16,6 +17,7 @@ def add_to_path(p):
         yield
     finally:
         sys.path = old_path
+
 
 def load_module(tested_file, load_as_main=False):
     with add_to_path(os.path.dirname(tested_file)):
@@ -36,6 +38,18 @@ def get_test_cases(module):
 
     return test_case_members[0].test_cases, test_case_members[0].parameters[0]
 
+
+def get_method_info(module):
+    members = inspect.getmembers(module)
+    challenge_method_members = [member[1]
+                                for member in members if member[0] == "challenge_method"]
+
+    if len(challenge_method_members) != 1:
+        return None, None, None
+
+    return challenge_method_members[0].method_info
+
+
 def build_parameter(name, inputs):
     possible_types = list(map(get_types, inputs))
 
@@ -46,15 +60,17 @@ def build_parameter(name, inputs):
         "name": name,
         "type": valid_types[0]
     }
-    
+
 
 def build_parameters(test_cases, parameters):
     return [
         build_parameter(name.strip(), inputs)
         for name, inputs in zip(parameters, list(zip(*[t.inputs for t in test_cases])))]
 
+
 def sum_points(test_cases):
     return sum(case.points for case in test_cases)
+
 
 def get_return_type(test_cases):
     outputs = [t.output for t in test_cases]
@@ -63,6 +79,7 @@ def get_return_type(test_cases):
     if len(valid_types) < 1:
         raise Exception("Couldn't determine output type")
     return valid_types[0]
+
 
 def get_difficulty(points):
     if points < 10:
@@ -73,14 +90,20 @@ def get_difficulty(points):
 
 
 def pytest_compiles(args):
-    module = load_module(args.test_file)
-    test_cases, parameters = get_test_cases(module)
+    test_module = load_module(args.test_file)
+    test_cases, parameters = get_test_cases(test_module)
     point_total = sum_points(test_cases)
+
+    source_module = load_module(args.source_file)
+    title, method_name, class_name = get_method_info(source_module)
 
     return {
         "points": point_total,
         "difficulty": get_difficulty(point_total),
         "returnType": get_return_type(test_cases),
         "parameters": build_parameters(test_cases, parameters.split(",")[:-1]),
-        "unitTests": [case.to_dict() for case in test_cases]
+        "unitTests": [case.to_dict() for case in test_cases],
+        "title": title or "",
+        "methodName": method_name or "",
+        "className": class_name or ""
     }
