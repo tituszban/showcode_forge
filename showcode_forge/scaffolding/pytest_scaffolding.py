@@ -17,7 +17,10 @@ def test_{1}({2}, {3}):
 """.lstrip()
 
 solution_bolierplate = """
+from showcode_forge import challenge_method
+
 class {0}:
+    @challenge_method(\"{3}\")
     def {1}(self, {2}):
         pass
 
@@ -32,6 +35,7 @@ def pytest_scaffold(args):
     method_name = args.method_name
     argument_names = ', '.join(args.argument)
     result_name = args.result
+    challenge_title = args.title
 
     solution_path = os.path.join(args.output_dir, "solution.py")
     test_path = os.path.join(args.output_dir, "test_solution.py")
@@ -41,7 +45,7 @@ def pytest_scaffold(args):
             class_name,
             method_name,
             argument_names,
-            result_name
+            challenge_title
         ))
 
     with open(test_path, "w") as f:
