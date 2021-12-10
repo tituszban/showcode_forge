@@ -57,7 +57,6 @@ class ChallengeMethodWrapper:
                 sp = f.__qualname__.split(".")
                 method_name = sp[-1] if len(sp) > 0 else None
                 class_name = sp[-2] if len(sp) > 1 else None
-                print(title, method_name, class_name)
                 self._found.append((title, method_name, class_name))
             return f
         return decorator
