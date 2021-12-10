@@ -1,20 +1,17 @@
 from .pytest_compiler import pytest_compiles
+from .question_parser import parse_question
 import json
-
-
-def load_html(filename):
-    with open(filename) as f:
-        return f.read()
 
 
 def compile(args):
 
-    rubric = load_html(args.question_file)
+    rubric = parse_question(args.question_file)
 
     if args.language == "py" and args.framework == "pytest_scforge":
         data = pytest_compiles(args)
     else:
-        raise Exception(f"Compilation is not yet supported for {args.language} {args.framework}")
+        raise Exception(
+            f"Compilation is not yet supported for {args.language} {args.framework}")
 
     with open(args.output, "w") as f:
         json.dump({

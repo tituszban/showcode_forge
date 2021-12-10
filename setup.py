@@ -2,7 +2,7 @@ import pathlib
 from setuptools import setup, find_packages
 import os
 
-version = "0.9"
+version = "0.10"
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -12,7 +12,8 @@ README = (HERE / "README.md").read_text()
 
 
 dependencies = [
-    "pytest"
+    "pytest",
+    "markdown"
 ]
 
 setup(
