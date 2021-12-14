@@ -17,7 +17,7 @@ def load_html(filename):
 
 def load_markdown(filename):
     with open(filename) as f:
-        html = markdown.markdown(f.read())
+        html = markdown.markdown(f.read(), extensions=['fenced_code'])
     return markdown_html_template.format(html)
 
 
